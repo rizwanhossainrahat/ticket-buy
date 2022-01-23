@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Ticket</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--Header and Menu Section-->
+    <header class="container">
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a class="active" href="#">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--Booking Section-->
+    <main class="main-content container">
+
+        <div class="booking-content">
+            <h1>Mega City Bus</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+
+
+        <div class="booking-form">
+            <h3>Explore By Bus</h3>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Dhaka">
+                </div>
+                <div class="input-group">
+                    <label" for="">From</label>
+                    <input class="inp-style" type="text" name="" placeholder="Chittagone">
+                </div>
+            </div>
+
+            <div class="inputs">
+                <div class="input-group">
+                    <label" for="">Departure</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+                <div class="input-group">
+                    <label for="">Return</label>
+                    <input class="inp-style" type="date" name="">
+                </div>
+            </div>
+            <div class="inputs">
+                <div class="input-group f-class">
+                <div>
+                    <label for="">First Class ($150)</label>
+                    <input id="firstClassTicketAmount" class="inp-style inp-width" type="number" value="1" name="">
+                </div>
+                <div class="plus-minus-btn">
+                    <button id="plusBtn" class="plus-minus-btn">+</button> 
+                    <button id="minusBtn" class="plus-minus-btn">-</button> 
+                </div>
+            </div>
+                <div class="input-group f-class">
+                    <div>
+                        <label for="">Economy ($100)</label>
+                        <input id="EconomicAmount" class="inp-style inp-width" type="number" value="1" name="">
+                    </div>
+                    <div class="plus-minus-btn">
+                        <button id="economicAmountPlusBtn" class="plus-minus-btn">+</button> 
+                        <button id="economicAmountMinusBtn" class="plus-minus-btn">-</button> 
+                    </div>
+                </div>
+
+            </div>
+            <div class="calculations">
+                <div class="amount">
+                    <div class="left">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="subtotalAmount">500</span></p>
+                    </div>
+                </div>
+
+                <div class="amount">
+                    <div class="left">
+                        <p>Charge 10% VAT</p>
+                    </div>
+                    <div class="right">
+                        <p>$<spna id="vatAmount">50</spna></p>
+                    </div>
+                </div>
+                <hr>
+                <div class="amount">
+                    <div class="left">
+                        <h4>Total</h4>
+                    </div>
+                    <div class="right">
+                        <p>$<span id="totalAmount">550</span></p>
+                    </div>
+                </div>
+            </div>
+            <button class="btn-style">Book Now</button>
+        </div>
+    </main>
+
+    <!--Thank You-->
+
+    <script>
+        // economic plus button
+        document.getElementById('economicAmountPlusBtn').addEventListener('click',function(){
+            economicClassTicketAmount(true); 
+            economicIncreaseDecreaseAmount(true);
+        });
+        // economic minus button
+        document.getElementById('economicAmountMinusBtn').addEventListener('click',function(){
+            economicClassTicketAmount(false); 
+            economicIncreaseDecreaseAmount(false);
+        });
+
+        // economic class ticket cost total
+        function economicIncreaseDecreaseAmount(isIncrease){
+               const subtotalAmount= document.getElementById('subtotalAmount').innerText;
+               let subtotalAmountNumber=parseInt(subtotalAmount);
+
+               const vatAmount=document.getElementById('vatAmount').innerText;
+               let vatAmountNumber=parseInt(vatAmount);
+
+                const totalAmount=document.getElementById('totalAmount').innerText;
+                let totalAmountNumber=parseInt(totalAmount);
+                
+                 if(isIncrease==true){
+                    subTotal=subtotalAmountNumber+100;                
+                    vat=vatAmountNumber+50;
+                    total=subTotal+vat;
+                    document.getElementById('subtotalAmount').innerText=subTotal;
+                 document.getElementById('vatAmount').innerText= vat;
+                 document.getElementById('totalAmount').innerText=total;
+
+                 }
+                 if(isIncrease==false){
+                    subTotal=subtotalAmountNumber-100;                
+                    vat=vatAmountNumber-50;
+                    total=subTotal-vat;
+                    document.getElementById('subtotalAmount').innerText=subTotal;
+                 document.getElementById('vatAmount').innerText= vat;
+                 document.getElementById('totalAmount').innerText=total;
+                 }
+             
+
+        }
+
+
+
+        // economic class ticket amount function
+        function economicClassTicketAmount(isIncrease){
+                const economicClassTicketAmount=document.getElementById('EconomicAmount').value;
+                const  economicClassTicketNumber=parseInt( economicClassTicketAmount);
+                let  economicClassTicketCount= economicClassTicketNumber;
+                if(isIncrease==true)
+                {
+                    economicClassTicketCount= economicClassTicketNumber+1;
+                }
+                if(isIncrease==false && economicClassTicketCount>0)
+                {
+                    economicClassTicketCount= economicClassTicketNumber-1;
+                }
+                document.getElementById('EconomicAmount').value= economicClassTicketCount;
+        }
+
+
+        // first class ticket increase button
+        document.getElementById('plusBtn').addEventListener('click',function(){
+            
+            firstClassTicketAmount(true);  
+            firstClassincreaseDecreaseAmount(true);
+           
+                  
+        });
+        // first class ticket minus button
+        document.getElementById('minusBtn').addEventListener('click',function(){
+            firstClassTicketAmount(false);   
+            firstClassincreaseDecreaseAmount(false);
+           
+        });
+
+        //first class ticket amount increase decrease function
+        function firstClassTicketAmount(isIncrease){
+                const firstClassTicketAmount=document.getElementById('firstClassTicketAmount').value;
+                const firstClassTicketNumber=parseInt(firstClassTicketAmount);
+                let firstClassTicketCount=firstClassTicketNumber;
+                if(isIncrease==true)
+                {
+                    firstClassTicketCount=firstClassTicketNumber+1;
+                }
+                if(isIncrease==false && firstClassTicketCount>0)
+                {
+                    firstClassTicketCount=firstClassTicketCount-1;
+                }
+                document.getElementById('firstClassTicketAmount').value=firstClassTicketCount;
+        }
+        // first class ticket cost increase decrease function
+        function firstClassincreaseDecreaseAmount(isIncrease){
+               const subtotalAmount= document.getElementById('subtotalAmount').innerText;
+               let subtotalAmountNumber=parseInt(subtotalAmount);
+
+               const vatAmount=document.getElementById('vatAmount').innerText;
+               let vatAmountNumber=parseInt(vatAmount);
+
+                const totalAmount=document.getElementById('totalAmount').innerText;
+                let totalAmountNumber=parseInt(totalAmount);
+                
+                 if(isIncrease==true){
+                    subTotal=subtotalAmountNumber+150;                
+                    vat=vatAmountNumber+50;
+                    total=subTotal+vat;
+                    document.getElementById('subtotalAmount').innerText=subTotal;
+                 document.getElementById('vatAmount').innerText= vat;
+                 document.getElementById('totalAmount').innerText=total;
+
+                 }
+                 if(isIncrease==false){
+                    subTotal=subtotalAmountNumber-150;                
+                    vat=vatAmountNumber-50;
+                    total=subTotal-vat;
+                    document.getElementById('subtotalAmount').innerText=subTotal;
+                 document.getElementById('vatAmount').innerText= vat;
+                 document.getElementById('totalAmount').innerText=total;
+                 }
+             
+
+        }
+
+           
+
+
+    </script>
+</body>
+
+</html>
